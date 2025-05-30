@@ -12,8 +12,8 @@ The system integrates three detection modules:
 -  **Fake Profile Detection:** ML-based classifier trained on real/fake account data.
 -  **Fake Image Detection:** CNN model trained to detect AI-generated profile images.
    
-    <p><img src="https://github.com/user-attachments/assets/4de01026-7f4d-4be7-87f9-0069cc565ec8" width="400"/></p>
-    <p><img src="https://github.com/user-attachments/assets/45466e68-dc6c-4f74-99ba-c1e51e1ba312" width="400"/></p>
+    <p><img src="https://github.com/user-attachments/assets/b7c91632-a2ba-46b3-b270-b621f0a2a716" width="350"/></p>
+    <p><img src="https://github.com/user-attachments/assets/b143d48f-7c95-43b8-8363-ba222e8f84c6" width="350"/></p>
 
 ##  Features
 
