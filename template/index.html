@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fake Profile Detector</title>
+  <style>
+    /* Background with subtle gradient pastel colors */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+      padding: 40px 20px;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    /* Main container card */
+    .container {
+      background-color: #fff;
+      max-width: 480px;
+      width: 100%;
+      padding: 30px 30px 40px 30px;
+      border-radius: 14px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-weight: 700;
+      color: #222;
+    }
+
+    form > div {
+      margin: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    label {
+      flex: 1 1 55%;
+      text-align: right;
+      font-weight: 600;
+      margin-right: 15px;
+      font-size: 15px;
+      color: #444;
+    }
+
+    input[type="number"], select, input[type="file"] {
+      flex: 1 1 40%;
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 1.8px solid #ccc;
+      border-radius: 6px;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="number"]:focus, select:focus, input[type="file"]:focus {
+      border-color: #3b82f6;
+      outline: none;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+    }
+
+    button {
+      margin-top: 30px;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      padding: 14px 34px;
+      font-size: 17px;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #2563eb;
+    }
+
+    .result-box {
+      padding: 18px 20px;
+      margin: 18px auto;
+      width: 340px;
+      border-radius: 14px;
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      user-select: none;
+      transition: background-color 0.4s ease;
+    }
+
+    .real {
+      background-color: #22c55e; /* green */
+    }
+
+    .fake {
+      background-color: #ef4444; /* red */
+    }
+
+    .info {
+      margin-top: 34px;
+      color: #555;
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 340px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h3 {
+      margin: 24px 0 10px;
+      color: #555;
+      font-weight: 600;
+      font-size: 18px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 6px;
+      max-width: 340px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Fake Profile Detector</h1>
+
+    <form id="detect-form" enctype="multipart/form-data">
+      <div>
+        <label for="image">Profile Image:</label>
+        <input type="file" name="image" id="image" accept="image/*" required />
+      </div>
+
+      <h3>Bot Model Features</h3>
+      <div><label for="statuses_count">Statuses Count:</label><input type="number" name="statuses_count" id="statuses_count" required value="500" /></div>
+      <div><label for="followers_count">Followers Count:</label><input type="number" name="followers_count" id="followers_count" required value="300" /></div>
+      <div><label for="friends_count">Friends Count:</label><input type="number" name="friends_count" id="friends_count" required value="400" /></div>
+      <div><label for="favourites_count">Favourites Count:</label><input type="number" name="favourites_count" id="favourites_count" required value="50" /></div>
+      <div><label for="listed_count">Listed Count:</label><input type="number" name="listed_count" id="listed_count" required value="10" /></div>
+      <div><label for="default_profile">Default Profile (0 or 1):</label>
+        <select name="default_profile" id="default_profile" required>
+          <option value="1" selected>1</option>
+          <option value="0">0</option>
+        </select>
+      </div>
+      <div><label for="profile_use_background_image">Profile Background Image (0 or 1):</label>
+        <select name="profile_use_background_image" id="profile_use_background_image" required>
+          <option value="1" selected>1</option>
+          <option value="0">0</option>
+        </select>
+      </div>
+
+      <h3>Profile Model Additional Features</h3>
+      <div><label for="has_description">Has Description (0 or 1):</label>
+        <select name="has_description" id="has_description" required>
+          <option value="1" selected>1</option>
+          <option value="0">0</option>
+        </select>
+      </div>
+      <div><label for="has_location">Has Location (0 or 1):</label>
+        <select name="has_location" id="has_location" required>
+          <option value="1" selected>1</option>
+          <option value="0">0</option>
+        </select>
+      </div>
+      <div><label for="verified">Verified (0 or 1):</label>
+        <select name="verified" id="verified" required>
+          <option value="0" selected>0</option>
+          <option value="1">1</option>
+        </select>
+      </div>
+      <div><label for="lang_encoded">Language Encoded (int):</label><input type="number" name="lang_encoded" id="lang_encoded" required value="0" /></div>
+      <div><label for="location_encoded">Location Encoded (int):</label><input type="number" name="location_encoded" id="location_encoded" required value="0" /></div>
+      <div><label for="description_length">Description Length:</label><input type="number" name="description_length" id="description_length" required value="0" /></div>
+
+      <button type="submit">Detect</button>
+    </form>
+
+    <div id="results">
+      <div id="bot-result" class="result-box"></div>
+      <div id="profile-result" class="result-box"></div>
+      <div id="image-result" class="result-box"></div>
+    </div>
+
+    <div class="info">
+      <p><strong>Threshold Guide:</strong></p>
+      <p>0% – 49%: Likely Real</p>
+      <p>50% – 100%: Likely Fake</p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('detect-form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      const response = await fetch('/predict', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!response.ok) {
+        alert('Error in prediction: ' + (await response.json()).error);
+        return;
+      }
+
+      const data = await response.json();
+
+      displayResult('bot-result', 'Bot Probability', data.bot_prob);
+      displayResult('profile-result', 'Fake Profile Probability', data.profile_prob);
+      displayResult('image-result', 'Fake Image Probability', data.image_prob);
+    });
+
+    function displayResult(elementId, label, value) {
+      const resultDiv = document.getElementById(elementId);
+      const isFake = value >= 0.5;
+      const percent = (value * 100).toFixed(2);
+      resultDiv.className = 'result-box ' + (isFake ? 'fake' : 'real');
+      resultDiv.innerText = `${label}: ${percent}% → ${isFake ? 'Likely Fake' : 'Likely Real'}`;
+    }
+  </script>
+</body>
+</html>
