@@ -41,8 +41,3 @@ The system integrates three detection modules:
   - `< 0.5` → ✅ Real  
   - `≥ 0.5` → ❌ Fake
 
-
-
-##  License
-
-Licensed under the **MIT License** – feel free to use, modify, and share with attribution.
