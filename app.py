@@ -9,9 +9,9 @@ import tensorflow as tf
 import cv2
 
 # --- Load models ---
-bot_model = joblib.load(r"D:\fake-profile-detector\data\twitter_bot_detection\profile_bot_rf_model.pkl")
-profile_model = joblib.load(r"D:\fake-profile-detector\data\fake_profile_detection\profile_detection_model.pkl")
-image_model = load_model(r"D:\fake-profile-detector\data\face_detection\fake_image_detector_model.h5")
+bot_model = joblib.load(r"D:\(1)fake-profile-detector\data\twitter_bot_detection\profile_bot_rf_model.pkl")
+profile_model = joblib.load(r"D:\(1)fake-profile-detector\data\fake_profile_detection\profile_detection_model.pkl")
+image_model = load_model(r"D:\(1)fake-profile-detector\data\face_detection\fake_image_detector_model.h5")
 
 # --- Feature order ---
 BOT_FEATURE_ORDER = [
@@ -105,7 +105,14 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align:center; color:#BB86FC;'>AI-Based Fake Profile & Image Detector</h1>", unsafe_allow_html=True)
+# Header
+st.markdown("""
+<div style='text-align:center'>
+    <h1 style='color:#BB86FC;'>AI-Based Fake Profile, Bot & Face Detection</h1>
+    <p>Classifies accounts as <b>Real</b>, <b>Suspicious</b>, or <b>Fake</b> — and explains feature contributions 🔍</p>
+</div>
+""", unsafe_allow_html=True)
+
 
 # Upload image
 st.subheader("Upload Profile Image")
